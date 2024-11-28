@@ -16,10 +16,10 @@ func NewServer(publicRoutes, privateRoutes []route.Route) *Server {
 		for _, route := range publicRoutes {
 			v1.Add(route.Method, route.Path, route.Handler)
 		}
-		if len(privateRoutes) > 0 {
-			for _, route := range privateRoutes {
-				v1.Add(route.Method, route.Path, route.Handler)
-			}
+	}
+	if len(privateRoutes) > 0 {
+		for _, route := range privateRoutes {
+			v1.Add(route.Method, route.Path, route.Handler)
 		}
 	}
 	return &Server{e}
