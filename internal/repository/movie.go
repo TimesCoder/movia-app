@@ -33,7 +33,7 @@ func (r *movieRepository) GetAll(ctx context.Context) ([]entity.Movie, error) {
 }
 
 func (r *movieRepository) GetByID(ctx context.Context, id int64) (result *entity.Movie, err error) {
-	if err := r.db.WithContext(ctx).Where("id = ?", id).First(result).Error; err != nil {
+	if err := r.db.WithContext(ctx).Where("id = ?", id).First(&result).Error; err != nil {
 		return nil, err
 	}
 	return
@@ -43,9 +43,9 @@ func (r *movieRepository) Create(ctx context.Context, movie *entity.Movie) error
 }
 
 func (r *movieRepository) Update(ctx context.Context, movie *entity.Movie) error {
-	return r.db.WithContext(ctx).Model(movie).Updates(movie).Error
+	return r.db.WithContext(ctx).Updates(&movie).Error
 }
 
 func (r *movieRepository) Delete(ctx context.Context, movie *entity.Movie) error {
-	return r.db.WithContext(ctx).Delete(movie).Error
+	return r.db.WithContext(ctx).Delete(&movie).Error
 }
